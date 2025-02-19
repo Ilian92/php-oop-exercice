@@ -33,5 +33,10 @@
         "path": "/admin/delete-user",
         "methods": ["DELETE"],
         "controller": "AdminDeleteUserController"
+    },
+    {
+        "path": "/admin/delete-post",
+        "methods": ["DELETE"],
+        "controller": "DeletePostController"
     }
 ]

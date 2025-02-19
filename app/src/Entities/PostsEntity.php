@@ -110,4 +110,13 @@ class PostsEntity extends AbstractEntity
 
         return $posts;
     }
+
+    public function delete(int $id): bool
+    {
+        $db = (new DbConnexion())->execute();
+
+        $sql = "DELETE FROM posts WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        return $stmt->execute(['id' => $id]);
+    }
 }
