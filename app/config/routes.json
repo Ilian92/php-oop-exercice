@@ -1,8 +1,8 @@
 [
     {
-        "path": "/homepage",
+        "path": "/posts",
         "methods": ["GET"],
-        "controller": "HomepageController"
+        "controller": "PostsController"
     },
     {
         "path": "/logout",
@@ -23,5 +23,15 @@
         "path": "/update-profile",
         "methods": ["PATCH"],
         "controller": "UpdateProfileController"
+    },
+    {
+        "path": "/admin/get-users",
+        "methods": ["GET"],
+        "controller": "AdminGetUsersController"
+    },
+    {
+        "path": "/admin/delete-user",
+        "methods": ["DELETE"],
+        "controller": "AdminDeleteUserController"
     }
 ]

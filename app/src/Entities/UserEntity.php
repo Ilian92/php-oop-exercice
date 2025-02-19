@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use App\Entities\AbstractEntity;
 use App\Database\DbConnexion;
+use App\Http\Request;
 
 class UserEntity extends AbstractEntity
 {
@@ -90,7 +91,7 @@ class UserEntity extends AbstractEntity
 
         if (isset($data['email'])) {
             $fields[] = 'email = :email';
-            $params['email'] = $this->RemoveSpecialChar($data['email']);
+            $params['email'] = $data['email'];
         }
 
         if (isset($data['password'])) {
@@ -105,5 +106,25 @@ class UserEntity extends AbstractEntity
         $sql = 'UPDATE users SET ' . implode(', ', $fields) . ' WHERE id = :id';
         $stmt = $db->prepare($sql);
         return $stmt->execute($params);
+    }
+
+    public function getAllUsers(): array
+    {
+        $db = (new DbConnexion())->execute();
+
+        $sql = "SELECT * FROM users";
+        $stmt = $db->query($sql);
+        $users = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
+    public function delete(int $id): bool
+    {
+        $db = (new DbConnexion())->execute();
+
+        $sql = "DELETE FROM users WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        return $stmt->execute(['id' => $id]);
     }
 }
